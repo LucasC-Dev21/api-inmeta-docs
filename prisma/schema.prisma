@@ -5,3 +5,82 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Collaborator {
+  id    String @id @default(uuid())
+  name  String
+  email String @unique
+
+  documentTypes CollaboratorDocumentType[]
+  documents     Document[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([deletedAt])
+}
+
+model DocumentType {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+
+  collaborators CollaboratorDocumentType[]
+  documents     Document[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@unique([name])
+  @@index([deletedAt])
+}
+
+model CollaboratorDocumentType {
+  id             String @id @default(uuid())
+  collaboratorId String
+  documentTypeId String
+
+  collaborator Collaborator @relation(fields: [collaboratorId], references: [id])
+  documentType DocumentType @relation(fields: [documentTypeId], references: [id])
+
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+
+  @@unique([collaboratorId, documentTypeId])
+  @@index([deletedAt])
+}
+
+model Document {
+  id             String @id @default(uuid())
+  collaboratorId String
+  documentTypeId String
+
+  collaborator Collaborator @relation(fields: [collaboratorId], references: [id])
+  documentType DocumentType @relation(fields: [documentTypeId], references: [id])
+
+  versions DocumentVersion[]
+
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+
+  @@index([deletedAt])
+}
+
+model DocumentVersion {
+  id         String  @id @default(uuid())
+  documentId String
+  version    Int
+  fileName   String
+  filePath   String
+  mimeType   String?
+  isActive   Boolean @default(true)
+
+  document Document @relation(fields: [documentId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([documentId, version])
+  @@index([documentId, isActive])
+}
