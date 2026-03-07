@@ -1,12 +1,16 @@
+import { Inject, Injectable } from '@nestjs/common';
 import { Collaborator } from '../../domain/entities/collaborator.entity';
-import { CollaboratorRepository } from '../../domain/repositories/collaborator.repository';
+import type { CollaboratorRepository } from '../../domain/repositories/collaborator.repository';
 import {
   CreateCollaboratorInput,
   CreateCollaboratorOutput,
 } from '../dtos/create-collaborator.dto';
+import { COLLABORATOR_REPOSITORY } from '../../shared/constants/repository.tokens';
 
+@Injectable()
 export class CreateCollaboratorUseCase {
   constructor(
+    @Inject(COLLABORATOR_REPOSITORY)
     private readonly collaboratorRepository: CollaboratorRepository,
   ) {}
 
