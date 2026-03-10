@@ -20,7 +20,7 @@ export class CreateCollaboratorUseCase {
     const existing = await this.collaboratorRepository.findByEmail(input.email);
 
     if (existing) {
-      throw new Error('Colaborador com este email já existe');
+      throw new Error('Já existe um colaborador cadastrado com esse email');
     }
 
     const collaborator = Collaborator.create(input.name, input.email);
