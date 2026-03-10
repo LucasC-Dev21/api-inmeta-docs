@@ -1,6 +1,6 @@
+import { CollaboratorRepository } from 'src/domain/repositories/collaborator.repository';
 import { CreateCollaboratorUseCase } from './create-collaborator.use-case';
-import { CollaboratorRepository } from '../../domain/repositories/collaborator.repository';
-import { Collaborator } from '../../domain/entities/collaborator.entity';
+import { Collaborator } from '../../../domain/entities/collaborator.entity';
 
 describe('CreateCollaboratorUseCase', () => {
   let useCase: CreateCollaboratorUseCase;

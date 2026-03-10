@@ -2,7 +2,11 @@ import { Module } from '@nestjs/common';
 import { PrismaModule } from 'src/infra/prisma/prisma.module';
 import { CollaboratorController } from './collaborator.controller';
 import { DocumentTypeController } from './document-type.controller';
-import { CreateCollaboratorUseCase } from 'src/application/use-cases/create-collaborator.use-case';
+import { CreateCollaboratorUseCase } from 'src/application/use-cases/collaborators/create-collaborator.use-case';
+import { GetCollaboratorUseCase } from 'src/application/use-cases/collaborators/get-collaborator.use-case';
+import { ListCollaboratorsUseCase } from 'src/application/use-cases/collaborators/list-collaborators.use-case';
+import { UpdateCollaboratorUseCase } from 'src/application/use-cases/collaborators/update-collaborator.use-case';
+import { DeleteCollaboratorUseCase } from 'src/application/use-cases/collaborators/delete-collaborator.use-case';
 import { CreateDocumentTypeUseCase } from 'src/application/use-cases/document-types/create-document-type.use-case';
 import { GetDocumentTypeUseCase } from 'src/application/use-cases/document-types/get-document-type.use-case';
 import { ListDocumentTypesUseCase } from 'src/application/use-cases/document-types/list-document-types.use-case';
@@ -14,6 +18,10 @@ import { DeleteDocumentTypeUseCase } from 'src/application/use-cases/document-ty
   controllers: [CollaboratorController, DocumentTypeController],
   providers: [
     CreateCollaboratorUseCase,
+    GetCollaboratorUseCase,
+    ListCollaboratorsUseCase,
+    UpdateCollaboratorUseCase,
+    DeleteCollaboratorUseCase,
     CreateDocumentTypeUseCase,
     GetDocumentTypeUseCase,
     ListDocumentTypesUseCase,
