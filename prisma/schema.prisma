@@ -9,7 +9,7 @@ datasource db {
 model Collaborator {
   id    String @id @default(uuid())
   name  String
-  email String @unique
+  email String
 
   documentTypes CollaboratorDocumentType[]
   documents     Document[]
@@ -18,6 +18,7 @@ model Collaborator {
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
+  @@unique([email, deletedAt])
   @@index([deletedAt])
 }
 
