@@ -18,6 +18,7 @@ import { LinkCollaboratorDocumentTypeUseCase } from 'src/application/use-cases/l
 import { UnlinkCollaboratorDocumentTypeUseCase } from 'src/application/use-cases/linking/unlink-collaborator-document-type.use-case';
 import { SubmitDocumentUseCase } from 'src/application/use-cases/documents/submit-document.use-case';
 import { GetDocumentUseCase } from 'src/application/use-cases/documents/get-document.use-case';
+import { ListPendingDocumentsUseCase } from 'src/application/use-cases/documents/list-pending-documents.use-case';
 
 @Module({
   imports: [PrismaModule],
@@ -42,6 +43,7 @@ import { GetDocumentUseCase } from 'src/application/use-cases/documents/get-docu
     UnlinkCollaboratorDocumentTypeUseCase,
     SubmitDocumentUseCase,
     GetDocumentUseCase,
+    ListPendingDocumentsUseCase,
   ],
 })
 export class ControllerModule {}
