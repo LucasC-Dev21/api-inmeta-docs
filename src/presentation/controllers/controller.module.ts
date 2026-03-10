@@ -3,6 +3,7 @@ import { PrismaModule } from 'src/infra/prisma/prisma.module';
 import { CollaboratorController } from './collaborator.controller';
 import { DocumentTypeController } from './document-type.controller';
 import { LinkingController } from './linking.controller';
+import { DocumentController } from './document.controller';
 import { CreateCollaboratorUseCase } from 'src/application/use-cases/collaborators/create-collaborator.use-case';
 import { GetCollaboratorUseCase } from 'src/application/use-cases/collaborators/get-collaborator.use-case';
 import { ListCollaboratorsUseCase } from 'src/application/use-cases/collaborators/list-collaborators.use-case';
@@ -15,6 +16,8 @@ import { UpdateDocumentTypeUseCase } from 'src/application/use-cases/document-ty
 import { DeleteDocumentTypeUseCase } from 'src/application/use-cases/document-types/delete-document-type.use-case';
 import { LinkCollaboratorDocumentTypeUseCase } from 'src/application/use-cases/linking/link-collaborator-document-type.use-case';
 import { UnlinkCollaboratorDocumentTypeUseCase } from 'src/application/use-cases/linking/unlink-collaborator-document-type.use-case';
+import { SubmitDocumentUseCase } from 'src/application/use-cases/documents/submit-document.use-case';
+import { GetDocumentUseCase } from 'src/application/use-cases/documents/get-document.use-case';
 
 @Module({
   imports: [PrismaModule],
@@ -22,6 +25,7 @@ import { UnlinkCollaboratorDocumentTypeUseCase } from 'src/application/use-cases
     CollaboratorController,
     DocumentTypeController,
     LinkingController,
+    DocumentController,
   ],
   providers: [
     CreateCollaboratorUseCase,
@@ -36,6 +40,8 @@ import { UnlinkCollaboratorDocumentTypeUseCase } from 'src/application/use-cases
     DeleteDocumentTypeUseCase,
     LinkCollaboratorDocumentTypeUseCase,
     UnlinkCollaboratorDocumentTypeUseCase,
+    SubmitDocumentUseCase,
+    GetDocumentUseCase,
   ],
 })
 export class ControllerModule {}
