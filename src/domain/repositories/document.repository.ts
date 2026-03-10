@@ -2,8 +2,14 @@ import { Document } from '../entities/document.entity';
 
 export interface DocumentRepository {
   create(document: Document): Promise<void>;
-  update(document: Document): Promise<void>;
-  findById(id: string): Promise<Document | null>;
-  findByCollaboratorId(collaboratorId: string): Promise<Document[]>;
-  findPending(): Promise<Document[]>;
+  findByCollaboratorAndType(
+    collaboratorId: string,
+    documentTypeId: string,
+  ): Promise<Document | null>;
+  findPending(params: {
+    collaboratorId?: string;
+    documentTypeId?: string;
+    page: number;
+    limit: number;
+  }): Promise<{ data: Document[]; total: number }>;
 }

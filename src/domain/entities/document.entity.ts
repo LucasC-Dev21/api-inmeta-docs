@@ -35,6 +35,18 @@ export class Document {
     this.deletedAt = props.deletedAt ?? null;
   }
 
+  static createPending(
+    collaboratorId: string,
+    documentTypeId: string,
+  ): Document {
+    return new Document({
+      collaboratorId,
+      documentTypeId,
+      status: DocumentStatus.PENDING,
+      versions: [],
+    });
+  }
+
   static create(
     collaboratorId: string,
     documentTypeId: string,
@@ -63,15 +75,10 @@ export class Document {
   }
 
   uploadNewVersion(fileName: string, filePath: string, mimeType?: string) {
-    if (this.deletedAt) {
-      throw new Error('Documento removido');
-    }
+    if (this.deletedAt) throw new Error('Documento removido');
 
     const currentVersion = this.getActiveVersion();
-
-    if (!currentVersion) {
-      throw new Error('Documento inconsistente');
-    }
+    if (!currentVersion) throw new Error('Documento inconsistente');
 
     currentVersion.deactivate();
 
@@ -90,16 +97,12 @@ export class Document {
   approve() {
     this.status = DocumentStatus.APPROVED;
   }
-
   reject() {
     this.status = DocumentStatus.REJECTED;
   }
 
   softDelete() {
-    if (this.deletedAt) {
-      throw new Error('Documento já removido');
-    }
-
+    if (this.deletedAt) throw new Error('Documento já removido');
     this.deletedAt = new Date();
   }
 
@@ -110,27 +113,21 @@ export class Document {
   getVersions(): DocumentVersion[] {
     return this.versions;
   }
-
   getId() {
     return this.id;
   }
-
   getCollaboratorId() {
     return this.collaboratorId;
   }
-
   getDocumentTypeId() {
     return this.documentTypeId;
   }
-
   getStatus() {
     return this.status;
   }
-
   getCreatedAt() {
     return this.createdAt;
   }
-
   getDeletedAt() {
     return this.deletedAt;
   }
