@@ -48,7 +48,7 @@ describe('CreateCollaboratorUseCase', () => {
     };
 
     await expect(useCase.execute(input)).rejects.toThrow(
-      'Colaborador com este email já existe',
+      'Já existe um colaborador cadastrado com esse email',
     );
 
     expect(repository.create).not.toHaveBeenCalled();
