@@ -4,6 +4,7 @@ import { CollaboratorController } from './collaborator.controller';
 import { DocumentTypeController } from './document-type.controller';
 import { LinkingController } from './linking.controller';
 import { DocumentController } from './document.controller';
+import { StatisticsController } from './statistics.controller';
 import { CreateCollaboratorUseCase } from 'src/application/use-cases/collaborators/create-collaborator.use-case';
 import { GetCollaboratorUseCase } from 'src/application/use-cases/collaborators/get-collaborator.use-case';
 import { ListCollaboratorsUseCase } from 'src/application/use-cases/collaborators/list-collaborators.use-case';
@@ -19,6 +20,7 @@ import { UnlinkCollaboratorDocumentTypeUseCase } from 'src/application/use-cases
 import { SubmitDocumentUseCase } from 'src/application/use-cases/documents/submit-document.use-case';
 import { GetDocumentUseCase } from 'src/application/use-cases/documents/get-document.use-case';
 import { ListPendingDocumentsUseCase } from 'src/application/use-cases/documents/list-pending-documents.use-case';
+import { GetStatisticsUseCase } from 'src/application/use-cases/statistics/get-statistics.use-case';
 
 @Module({
   imports: [PrismaModule],
@@ -27,6 +29,7 @@ import { ListPendingDocumentsUseCase } from 'src/application/use-cases/documents
     DocumentTypeController,
     LinkingController,
     DocumentController,
+    StatisticsController,
   ],
   providers: [
     CreateCollaboratorUseCase,
@@ -44,6 +47,7 @@ import { ListPendingDocumentsUseCase } from 'src/application/use-cases/documents
     SubmitDocumentUseCase,
     GetDocumentUseCase,
     ListPendingDocumentsUseCase,
+    GetStatisticsUseCase,
   ],
 })
 export class ControllerModule {}
