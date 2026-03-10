@@ -7,14 +7,12 @@ import {
 import type { CollaboratorRepository } from '../../../domain/repositories/collaborator.repository';
 import type { DocumentTypeRepository } from '../../../domain/repositories/document-type.repository';
 import type { CollaboratorDocumentTypeRepository } from '../../../domain/repositories/collaborator-document-type.repository';
-import type { DocumentRepository } from '../../../domain/repositories/document.repository';
 import { Document } from '../../../domain/entities/document.entity';
 import { PrismaService } from '../../../infra/prisma/prisma.service';
 import {
   COLLABORATOR_REPOSITORY,
   COLLABORATOR_DOCUMENT_TYPE_REPOSITORY,
   DOCUMENT_TYPE_REPOSITORY,
-  DOCUMENT_REPOSITORY,
 } from '../../../shared/constants/repository.tokens';
 
 @Injectable()
@@ -26,8 +24,6 @@ export class LinkCollaboratorDocumentTypeUseCase {
     private readonly documentTypeRepository: DocumentTypeRepository,
     @Inject(COLLABORATOR_DOCUMENT_TYPE_REPOSITORY)
     private readonly linkRepository: CollaboratorDocumentTypeRepository,
-    @Inject(DOCUMENT_REPOSITORY)
-    private readonly documentRepository: DocumentRepository,
     private readonly prisma: PrismaService,
   ) {}
 
