@@ -21,6 +21,7 @@ import { SubmitDocumentUseCase } from 'src/application/use-cases/documents/submi
 import { GetDocumentUseCase } from 'src/application/use-cases/documents/get-document.use-case';
 import { ListPendingDocumentsUseCase } from 'src/application/use-cases/documents/list-pending-documents.use-case';
 import { GetStatisticsUseCase } from 'src/application/use-cases/statistics/get-statistics.use-case';
+import { HealthController } from './health.controller';
 
 @Module({
   imports: [PrismaModule],
@@ -30,6 +31,7 @@ import { GetStatisticsUseCase } from 'src/application/use-cases/statistics/get-s
     LinkingController,
     DocumentController,
     StatisticsController,
+    HealthController,
   ],
   providers: [
     CreateCollaboratorUseCase,

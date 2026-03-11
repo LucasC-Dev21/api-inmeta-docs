@@ -1,98 +1,198 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# API de Gerenciamento de Documentação de Colaboradores
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API responsável pelo gerenciamento de colaboradores e seus documentos obrigatórios. Permite cadastrar colaboradores, definir tipos de documentos, vincular documentos obrigatórios e armazenar os arquivos enviados.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tecnologias
 
-## Description
+- **NestJS** – estrutura da API
+- **TypeScript** – tipagem e organização do código
+- **Prisma ORM** – acesso e gerenciamento do banco
+- **PostgreSQL** – banco de dados relacional
+- **Docker** – para subir o banco facilmente
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## Instalação
+
+### 1. Instalar dependências
 
 ```bash
-$ npm install
+npm install
 ```
 
-## Compile and run the project
+### 2. Criar arquivo de ambiente
+
+Crie um arquivo `.env` na raiz do projeto:
+
+```env
+DATABASE_URL=postgresql://inmeta:inmeta@localhost:5433/inmeta?schema=public
+PORT=3000
+```
+
+### 3. Subir o banco de dados
+
+O projeto utiliza Docker para iniciar o PostgreSQL:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+docker-compose up -d
 ```
 
-## Run tests
+### 4. Rodar migrations e gerar o client do Prisma
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npx prisma migrate dev
+npx prisma generate
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 5. Iniciar a aplicação
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm run start:dev
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+A API ficará disponível em: `http://localhost:3000`
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## Estrutura da API
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+A API é organizada em quatro domínios principais:
 
-## Support
+- **Collaborators** – gerenciamento de colaboradores
+- **Document Types** – tipos de documentos exigidos
+- **Documents** – documentos enviados pelos colaboradores
+- **Statistics** – estatísticas gerais
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+## Rotas
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Colaboradores
 
-## License
+Gerencia o cadastro de colaboradores.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```
+POST   /collaborators
+Body: { name, email }
+
+GET    /collaborators
+
+GET    /collaborators/:id
+
+PATCH  /collaborators/:id
+Body: { name?, email? }
+
+DELETE /collaborators/:id
+```
+
+---
+
+### Tipos de Documento
+
+Define quais tipos de documentos podem existir no sistema.
+
+```
+POST   /document-types
+Body: { name, description? }
+
+GET    /document-types
+
+GET    /document-types/:id
+
+PATCH  /document-types/:id
+Body: { name?, description? }
+
+DELETE /document-types/:id
+```
+
+---
+
+### Vinculação de Documento ao Colaborador
+
+Permite definir quais documentos são obrigatórios para um colaborador.
+
+```
+POST   /collaborators/:collaboratorId/document-types/:documentTypeId
+
+DELETE /collaborators/:collaboratorId/document-types/:documentTypeId
+```
+
+---
+
+### Documentos
+
+Upload e consulta de documentos enviados pelos colaboradores.
+
+```
+POST /collaborators/:collaboratorId/documents
+```
+
+Body:
+
+```json
+{
+  "documentTypeId": "uuid",
+  "fileName": "string",
+  "filePath": "string",
+  "mimeType": "string (opcional)"
+}
+```
+
+Buscar documento por tipo:
+
+```
+GET /collaborators/:collaboratorId/documents/:documentTypeId
+```
+
+---
+
+### Documentos Pendentes
+
+Lista documentos obrigatórios que ainda não foram enviados.
+
+```
+GET /documents/pending
+```
+
+Query params disponíveis:
+
+| Parâmetro        | Tipo   | Descrição                     |
+| ---------------- | ------ | ----------------------------- |
+| `collaboratorId` | uuid   | Filtra por colaborador        |
+| `documentTypeId` | uuid   | Filtra por tipo de documento  |
+| `page`           | number | Página (padrão: 1)            |
+| `limit`          | number | Itens por página (padrão: 10) |
+
+Exemplo:
+
+```
+GET /documents/pending?collaboratorId=uuid&documentTypeId=uuid&page=1&limit=10
+```
+
+---
+
+### Estatísticas
+
+Retorna métricas gerais do sistema.
+
+```
+GET /statistics
+```
+
+---
+
+## Deploy
+
+O projeto conta com um workflow de CI/CD em `.github/workflows/deploy.yml` que, ao fazer merge de um PR na branch `production`, executa os testes automaticamente e realiza o deploy na VPS via SSH usando PM2.
+
+> **Atenção:** esse arquivo de deploy não foi validado em ambiente real. Ele foi montado com auxílio de IA, inspirado em um workflow de deploy que eu utilizo em outros projetos em produção.
+
+---
+
+## Testes
+
+Para rodar os testes automatizados:
+
+```bash
+npm run test
+```
